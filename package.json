@@ -1,0 +1,31 @@
+{
+  "name": "image-compressor",
+  "version": "1.0.0",
+  "description": "Desktop app to compress images",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "nodemon --exec electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joseph-muchene/Image-compressor.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joseph-muchene/Image-compressor/issues"
+  },
+  "homepage": "https://github.com/joseph-muchene/Image-compressor#readme",
+  "devDependencies": {
+    "electron": "^22.2.0"
+  },
+  "dependencies": {
+    "electron-log": "^4.1.2",
+    "imagemin": "^7.0.1",
+    "imagemin-mozjpeg": "^8.0.0",
+    "imagemin-pngquant": "^8.0.0",
+    "slash": "^3.0.0"
+  }
+}

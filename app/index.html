@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="script-src 'self' 'unsafe-inline' "
+    />
+    <title>Image compressor</title>
+  </head>
+  <body>
+    <h1>Image compressor</h1>
+    <form id="form">
+      <div class="form-group">
+        <input type="file" id="img" />
+      </div>
+      <div class="form-group">
+        <input type="range" min="0" max="100" id="slider" />
+      </div>
+
+      <button type="submit" class="btn-compress">Compress Image</button>
+    </form>
+    <!-- connect the render process to the main process -->
+
+    <script>
+      const { ipcRenderer } = require("electron");
+
+      const form = document.getElementById("form");
+      const slider = document.getElementById("slider");
+      const img = document.getElementById("img");
+      //   handle form submission event
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const imgPath = img.files[0].path;
+        const quality = slider.value;
+
+        // send the data to the main process
+        ipcRenderer.send("image:minimize", {
+          imgPath,
+          quality,
+        });
+
+        // receive from main process
+        ipcRenderer.on("image:done", () => {
+          alert(`Image resized to ${slider.value}% quality`);
+        });
+      });
+    </script>
+  </body>
+</html>
